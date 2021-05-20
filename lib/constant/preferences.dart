@@ -1,0 +1,1 @@
+const String PR_KEY_SHOULD_INCLUDE_REVIEWS = 'shouldIncludeReview';

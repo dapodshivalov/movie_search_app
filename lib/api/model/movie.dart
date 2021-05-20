@@ -1,25 +1,21 @@
+import 'package:movie_search_app/api/utils.dart';
+
 class Movie {
+  final int kpId;
   final String title;
   final String posterUrl;
-  final int releaseYear;
+  final int year;
   final List<String> genres;
 
-  Movie(this.title, this.posterUrl, this.releaseYear, this.genres);
+  Movie(this.kpId, this.title, this.posterUrl, this.year, this.genres);
 
   static Movie fromJson(Map<String, dynamic> json) {
     return Movie(
+      int.tryParse(json['kp_id']),
       json['title'],
       json['poster_url'],
-      int.tryParse(json['release_year']),
-      parseGenres(json['genres'])
+      int.tryParse(json['year'] == null ? "" : json['year']),
+      parseListOfString(json['genres'])
     );
-  }
-
-  static List<String> parseGenres(List<dynamic> genres) {
-    List<String> result = List.empty(growable: true);
-    genres.forEach((element) {
-      result.add(element);
-    });
-    return result;
   }
 }
